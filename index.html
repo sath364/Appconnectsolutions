@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ta">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>அருள்மிகு அங்காள பரமேஸ்வரி கோவில் மேலாண்மை</title>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#FF9933" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'primary': '#FF9933', // Saffron
+              'primary-hover': '#E68A2E',
+              'background': '#FFF8E1', // Light Cream
+              'sidebar': '#FFFFFF',
+              'card': '#FFFFFF',
+              'text-primary': '#5D4037', // Dark Brown
+              'text-secondary': '#8D6E63',
+              'border-color': '#D7CCC8',
+              'danger': '#B71C1C', // Maroon
+              'danger-light': 'rgba(183, 28, 28, 0.1)',
+              'success': '#2E7D32', // Deep Green
+              'success-light': 'rgba(46, 125, 50, 0.1)',
+              'warning': '#FFC107', // Gold
+              'warning-light': 'rgba(255, 193, 7, 0.1)',
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.autotable.min.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-background text-text-primary antialiased">
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

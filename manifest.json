@@ -1,0 +1,28 @@
+{
+  "name": "அருள்மிகு அங்காள பரமேஸ்வரி கோவில்",
+  "short_name": "A.P. Kovil",
+  "description": "தமிழ்நாடு பாணியில் கோவில் நடவடிக்கைகளை நிர்வகிப்பதற்கான ஒரு செயலி. நன்கொடைகளைக் கண்காணிக்கவும், குருக்களை நிர்வகிக்கவும், மற்றும் ஒரு AI கோவில் உதவியாளரின் உதவியுடன் திருவிழா நிதிகளை ஒழுங்கமைக்கவும்.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFF8E1",
+  "theme_color": "#FF9933",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/maskable-icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ]
+}
