@@ -1,51 +1,61 @@
-const CACHE_NAME = 'ap-kovil-cache-v1';
-// Add the paths to the assets you want to cache initially.
-// The root '/' and 'index.html' are essential for the app shell.
+const CACHE_NAME = 'kovil-app-cache-v1';
+// Add the app shell URLs to this list.
 const urlsToCache = [
   '/',
   '/index.html',
+  '/index.tsx',
+  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+  'https://cdn.tailwindcss.com',
 ];
 
-// Install a service worker
+// Install the service worker and cache the app shell.
 self.addEventListener('install', event => {
-  // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
+      .catch(err => {
+        console.error('Failed to open cache: ', err);
+      })
   );
 });
 
-// Cache and return requests
+// Serve cached content when offline.
 self.addEventListener('fetch', event => {
-  // We only want to handle GET requests.
-  if (event.request.method !== 'GET') {
-    return;
-  }
-  
   event.respondWith(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.match(event.request).then(response => {
-        // Return response from cache if found.
-        const fetchPromise = fetch(event.request).then(networkResponse => {
-            // Check if we received a valid response
-            if (networkResponse && networkResponse.status === 200) {
-              const responseToCache = networkResponse.clone();
-              cache.put(event.request, responseToCache);
-            }
-            return networkResponse;
-        });
+    caches.match(event.request)
+      .then(response => {
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
 
-        // Return the cached response immediately if available, and then fetch an update.
-        return response || fetchPromise;
-      });
-    })
+        // Not in cache - fetch from network
+        return fetch(event.request).then(
+          networkResponse => {
+            // Check if we received a valid response
+            if (!networkResponse || networkResponse.status !== 200) {
+              return networkResponse;
+            }
+
+            // Clone the response to use it both for caching and for the browser
+            const responseToCache = networkResponse.clone();
+
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put(event.request, responseToCache);
+              });
+
+            return networkResponse;
+          }
+        );
+      })
   );
 });
 
-// Update a service worker
+// Clean up old caches.
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(

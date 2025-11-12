@@ -6,6 +6,7 @@
     <title>அருள்மிகு அங்காள பரமேஸ்வரி கோவில் மேலாண்மை</title>
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#FF9933" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -31,8 +32,6 @@
         }
       }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.autotable.min.js"></script>
   <script type="importmap">
 {
   "imports": {
@@ -46,13 +45,14 @@
 </head>
   <body class="bg-background text-text-primary antialiased">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js').then(registration => {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-          }, err => {
-            console.log('ServiceWorker registration failed: ', err);
+            console.log('SW registered: ', registration);
+          }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
           });
         });
       }
